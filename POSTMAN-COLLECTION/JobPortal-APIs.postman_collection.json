@@ -1,0 +1,531 @@
+{
+	"info": {
+		"_postman_id": "20f2848d-90e9-45bf-9673-d3595ea9a95e",
+		"name": "JobPortal-APIs",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "34140767"
+	},
+	"item": [
+		{
+			"name": "Add User(employer)",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "// {\r\n//   \"username\": \"Lufthans\",\r\n//   \"password\": \"password123\",\r\n//   \"email\": \"Lufthans@example.com\",\r\n//   \"role\": \"EMPLOYER\"\r\n// }\r\n\r\n\r\n// {\r\n//   \"username\": \"Deloite\",\r\n//   \"password\": \"password123\",\r\n//   \"email\": \"Deloite@example.com\",\r\n//   \"role\": \"EMPLOYER\"\r\n// }\r\n\r\n\r\n// {\r\n//   \"username\": \"ATLAS ANALYTICS\",\r\n//   \"password\": \"password123\",\r\n//   \"email\": \"ATLAS ANALYTICS@example.com\",\r\n//   \"role\": \"EMPLOYER\"\r\n// }\r\n\r\n\r\n\r\n// {\r\n//   \"username\": \"ikubINFO:\",\r\n//   \"password\": \"password123\",\r\n//   \"email\": \"ikubINFO:@example.com\",\r\n//   \"role\": \"EMPLOYER\"\r\n// }\r\n\r\n\r\n// {\r\n//   \"username\": \"LOGICAL:\",\r\n//   \"password\": \"password123\",\r\n//   \"email\": \"LOGICAL:@example.com\",\r\n//   \"role\": \"EMPLOYER\"\r\n// }\r\n\r\n\r\n// {\r\n//   \"username\": \"3i-Solutions:\",\r\n//   \"password\": \"password123\",\r\n//   \"email\": \"3i-Solutions:@example.com\",\r\n//   \"role\": \"EMPLOYER\"\r\n// }\r\n\r\n// {\r\n//   \"username\": \"Henotics:\",\r\n//   \"password\": \"password123\",\r\n//   \"email\": \"Henotics:@example.com\",\r\n//   \"role\": \"EMPLOYER\"\r\n// }\r\n\r\n\r\n// {\r\n//   \"username\": \"TEST1:\",\r\n//   \"password\": \"password123\",\r\n//   \"email\": \"TEST1:@example.com\",\r\n//   \"role\": \"EMPLOYER\"\r\n// }\r\n\r\n\r\n// {\r\n//   \"username\": \"TEST2:\",\r\n//   \"password\": \"password123\",\r\n//   \"email\": \"TEST2:@example.com\",\r\n//   \"role\": \"EMPLOYER\"\r\n// }\r\n\r\n\r\n// {\r\n//   \"username\": \"TEST3:\",\r\n//   \"password\": \"password123\",\r\n//   \"email\": \"TEST3:@example.com\",\r\n//   \"role\": \"EMPLOYER\"\r\n// }\r\n\r\n\r\n// {\r\n//   \"username\": \"TEST4:\",\r\n//   \"password\": \"password123\",\r\n//   \"email\": \"TEST4:@example.com\",\r\n//   \"role\": \"EMPLOYER\"\r\n// }\r\n\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add User(Job Seeker)",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "// {\r\n//   \"username\": \"JOE DOE\",\r\n//   \"password\": \"password123\",\r\n//   \"email\": \"JOE.DOE@gmail.com\",\r\n//   \"role\": \"JOB_SEEKER\"\r\n// }\r\n\r\n// {\r\n//   \"username\": \"JOE DOE1\",\r\n//   \"password\": \"password123\",\r\n//   \"email\": \"JOE.DOE1@gmail.com\",\r\n//   \"role\": \"JOB_SEEKER\"\r\n// }\r\n\r\n// {\r\n//   \"username\": \"JOE DOE2\",\r\n//   \"password\": \"password123\",\r\n//   \"email\": \"JOE.DOE2@gmail.com\",\r\n//   \"role\": \"JOB_SEEKER\"\r\n// }\r\n\r\n// {\r\n//   \"username\": \"JOE DOE3\",\r\n//   \"password\": \"password123\",\r\n//   \"email\": \"JOE.DOE3@gmail.com\",\r\n//   \"role\": \"JOB_SEEKER\"\r\n// }\r\n// {\r\n//   \"username\": \"JOE DOE4\",\r\n//   \"password\": \"password123\",\r\n//   \"email\": \"JOE.DOE4@gmail.com\",\r\n//   \"role\": \"JOB_SEEKER\"\r\n// }\r\n\r\n// {\r\n//   \"username\": \"JOE DOE5\",\r\n//   \"password\": \"password123\",\r\n//   \"email\": \"JOE.DOE5@gmail.com\",\r\n//   \"role\": \"JOB_SEEKER\"\r\n// }\r\n\r\n// {\r\n//   \"username\": \"JOE DOE6\",\r\n//   \"password\": \"password123\",\r\n//   \"email\": \"JOE.DOE6@gmail.com\",\r\n//   \"role\": \"JOB_SEEKER\"\r\n// }\r\n\r\n// {\r\n//   \"username\": \"JOE DOE7\",\r\n//   \"password\": \"password123\",\r\n//   \"email\": \"JOE.DOE7@gmail.com\",\r\n//   \"role\": \"JOB_SEEKER\"\r\n// }\r\n\r\n// {\r\n//   \"username\": \"JOE DOE8\",\r\n//   \"password\": \"password123\",\r\n//   \"email\": \"JOE.DOE8@gmail.com\",\r\n//   \"role\": \"JOB_SEEKER\"\r\n// }\r\n\r\n// {\r\n//   \"username\": \"JOE DOE9\",\r\n//   \"password\": \"password123\",\r\n//   \"email\": \"JOE.DOE9@gmail.com\",\r\n//   \"role\": \"JOB_SEEKER\"\r\n// }\r\n\r\n// {\r\n//   \"username\": \"JOE DOE10\",\r\n//   \"password\": \"password123\",\r\n//   \"email\": \"JOE.DOE10@gmail.com\",\r\n//   \"role\": \"JOB_SEEKER\"\r\n// }\r\n\r\n// {\r\n//   \"username\": \"JOE DOE11\",\r\n//   \"password\": \"password123\",\r\n//   \"email\": \"JOE.DOE11@gmail.com\",\r\n//   \"role\": \"JOB_SEEKER\"\r\n// }\r\n\r\n// {\r\n//   \"username\": \"JOE DOE12\",\r\n//   \"password\": \"password123\",\r\n//   \"email\": \"JOE.DOE12@gmail.com\",\r\n//   \"role\": \"JOB_SEEKER\"\r\n// }\r\n\r\n// {\r\n//   \"username\": \"JOE DOE13\",\r\n//   \"password\": \"password123\",\r\n//   \"email\": \"JOE.DOE13@gmail.com\",\r\n//   \"role\": \"JOB_SEEKER\"\r\n// }\r\n\r\n\r\n{\r\n  \"username\": \"Jttt\",\r\n  \"password\": \"password123\",\r\n  \"email\": \"JOE.DOtE13@gmail.com\",\r\n  \"role\": \"JOB_SEEKER\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add User(ADMIN)",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"username\": \"ADMIN\",\r\n  \"password\": \"ADMIN123\",\r\n  \"email\": \"ADMIN@example.com\",\r\n  \"role\": \"ADMIN\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "LOGIN",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "// {\r\n//   \"username\": \"ADMIN\",\r\n//   \"password\": \"ADMIN123\"\r\n// }\r\n\r\n// {\r\n//   \"username\": \"JOE DOE\",\r\n//   \"password\": \"password123\"\r\n  \r\n// }\r\n\r\n\r\n{\r\n   \"username\": \"Lufthans\",\r\n     \"password\": \"password123\"\r\n  \r\n}\r\n\r\n\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/auth/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Job-Position",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJEZWxvaXRlIiwicm9sZXMiOlsiUk9MRV9FTVBMT1lFUiJdLCJpYXQiOjE3NDEyOTUzOTMsImV4cCI6MTc0MTM4MTc5M30.fHfmsAWjN7yLcjq7DvHlPRU0vWtSNZRvIZvJUbQdSMo",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"title\": \"Software Tester\",\r\n  \"description\": \"Responsible for developing software applications...\",\r\n  \"location\": \"Albania\",\r\n  \"salaryMin\": 50000,\r\n  \"salaryMax\": 70000,\r\n  \"experienceRequired\": 2,\r\n  \"educationLevel\": \"Master\",\r\n  \"status\": \"OPEN\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/jobs/createJob",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"jobs",
+						"createJob"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get Job Position",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJKT0UgRE9FIiwicm9sZXMiOlsiUk9MRV9KT0JfU0VFS0VSIl0sImlhdCI6MTc0MTU1NDc3MiwiZXhwIjoxNzQxNjQxMTcyfQ.N_I8ldICyPI1fK2RhGUCD2Rum6br4MtulLPazFTlZf0",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"username\": \"john_doe\",\r\n  \"password\": \"password123\",\r\n  \"email\": \"john.doe@example.com\",\r\n  \"role\": \"ADMIN\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/jobs/getJobs?page=0&size=5&title=Software&location=DURRES&status=OPEN",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"jobs",
+						"getJobs"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "0"
+						},
+						{
+							"key": "size",
+							"value": "5"
+						},
+						{
+							"key": "title",
+							"value": "Software"
+						},
+						{
+							"key": "location",
+							"value": "DURRES"
+						},
+						{
+							"key": "status",
+							"value": "OPEN"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Apply for a JOb",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJKT0UgRE9FIiwicm9sZXMiOlsiUk9MRV9KT0JfU0VFS0VSIl0sImlhdCI6MTc0MTI5ODk0MCwiZXhwIjoxNzQxMzg1MzQwfQ.RuEuhqBHEIPGjJ3NNmqeBtKwzPE-gV9XFKRyYlx6Zlw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"resume\": \"https://example.com/resumes/job_seeker_resume.pdf\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/applications/apply/5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"applications",
+						"apply",
+						"5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Seeker Applications",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJFbHZpcyBNaWhhc2kiLCJyb2xlcyI6WyJST0xFX0pPQl9TRUVLRVIiXSwiaWF0IjoxNzQxMjk5NTcxLCJleHAiOjE3NDEzODU5NzF9.xjVOStggQHea_BNwJAwqh8HcIhYNoEyVzQLrkk05kiY",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"resume\": \"https://example.com/resumes/job_seeker_resume.pdf\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/applications/myApplications",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"applications",
+						"myApplications"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Applications for a JOb",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJMdWZ0aGFucyIsInJvbGVzIjpbIlJPTEVfRU1QTE9ZRVIiXSwiaWF0IjoxNzQxNTU2MzEwLCJleHAiOjE3NDE2NDI3MTB9.BMi3EwQg8XZhd6obr1mqbJ5D4KBM-y3J2TIPvw1ZePw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"resume\": \"https://example.com/resumes/job_seeker_resume.pdf\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/applications/myApplicationsForJob/2?page=0&size=5&status=REJECTED",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"applications",
+						"myApplicationsForJob",
+						"2"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "0"
+						},
+						{
+							"key": "size",
+							"value": "5"
+						},
+						{
+							"key": "status",
+							"value": "REJECTED"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Change Application Status",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJMdWZ0aGFucyIsInJvbGVzIjpbIlJPTEVfRU1QTE9ZRVIiXSwiaWF0IjoxNzQxNTU3ODEwLCJleHAiOjE3NDE2NDQyMTB9.xjYyO4gt8niHGoSkUY0fGB1h94V73WUEP64qtmpn2mI",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"status\": \"REJECTED\",\r\n  \"review\": \"Great candidate, looking forward to an interview.\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/applications/updateStatus/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"applications",
+						"updateStatus",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE Users",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJBRE1JTiIsInJvbGVzIjpbIlJPTEVfQURNSU4iXSwiaWF0IjoxNzQxNTUzNjY1LCJleHAiOjE3NDE2NDAwNjV9.MMnIiN5gLOXG2RuF7Uwautit5EpG4J7yPHvWC6THJww",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"resume\": \"https://example.com/resumes/job_seeker_resume.pdf\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/users/delete/33",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"users",
+						"delete",
+						"33"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Users and Filter",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJBRE1JTiIsInJvbGVzIjpbIlJPTEVfQURNSU4iXSwiaWF0IjoxNzQxNTUxNTE0LCJleHAiOjE3NDE2Mzc5MTR9.7tqTWE-20kbLBLmS0KM4NFFCrwGQvwWddCQllDTTYvg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "page",
+						"value": "0",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"resume\": \"https://example.com/resumes/job_seeker_resume.pdf\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/users/filter?page=0&size=10&role=EMPLOYER&email=ATLAS ANALYTICS@example.com&username=ATLAS ANALYTICS",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"users",
+						"filter"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "0"
+						},
+						{
+							"key": "size",
+							"value": "10"
+						},
+						{
+							"key": "role",
+							"value": "EMPLOYER"
+						},
+						{
+							"key": "email",
+							"value": "ATLAS ANALYTICS@example.com"
+						},
+						{
+							"key": "username",
+							"value": "ATLAS ANALYTICS"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
