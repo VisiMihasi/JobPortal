@@ -1,0 +1,26 @@
+#!/bin/bash
+
+# Define the path to the SQL script on your host machine
+SQL_SCRIPT_PATH="/mnt/c/Users/U767282/Documents/backend/DOCKER/dump-file.sql"
+
+# Check if the container exists
+if [ $(docker ps -a -f name=mysql-jobPortal --format '{{.Names}}') == "mysql-jobPortal" ]; then
+    echo "Container exists. Starting the container if not already running..."
+    docker start mysql-jobPortal
+else
+    echo "Container does not exist. Creating and starting the container..."
+    # Create and start the container
+    docker run --name mysql-jobPortal \
+               -e MYSQL_ROOT_PASSWORD=root \
+               -e MYSQL_DATABASE=job_portal_db \
+               -p 3333:3306 \
+               -d mysql:latest
+    # Wait for MySQL to fully start
+    echo "Waiting for MySQL to initialize..."
+    sleep 30
+    # Execute the SQL script to set up the database schema
+    echo "Applying the SQL script..."
+    docker exec -i mysql-jobPortal sh -c 'exec mysql -uroot -proot job_portal_db' < "$SQL_SCRIPT_PATH"
+fi
+
+echo "Database setup complete."
