@@ -35,7 +35,7 @@ jobs:
       - name: Calculate new version
         run: |
           VERSION=$(cat version.properties | cut -d'=' -f2)
-          NEW_VERSION=$(awk -F. '{print $1"."$2"."$3+1}' version.properties)
+          NEW_VERSION=$(awk -F. '{print $1"."$2"."($3+1)}' version.properties)
           
           echo "VERSION=$NEW_VERSION" > version.properties
           echo "New version: $NEW_VERSION"
@@ -47,7 +47,7 @@ jobs:
           git commit -m "Bump version to $NEW_VERSION"
 
           # Authenticate using GH_PAT
-          git remote set-url origin https://${{ secrets.GH_PAT }}@github.com/VisiMihasi/JobPortal.git
+          git remote set-url origin "https://x-access-token:${{ secrets.GH_PAT }}@github.com/VisiMihasi/JobPortal.git"
 
           # Push changes
           git push origin HEAD:Deployment --force
@@ -56,7 +56,7 @@ jobs:
           GH_PAT: ${{ secrets.GH_PAT }}
 
       - name: Grant execute permissions to Gradle wrapper
-        run: chmod +x ./gradlew
+        run: chmod +x gradlew
 
       - name: Build with Gradle
         run: ./gradlew build
