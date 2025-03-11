@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jobportal-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: jobportal-app
+  template:
+    metadata:
+      labels:
+        app: jobportal-app
+    spec:
+      containers:
+        - name: jobportal-app
+          image: visimihasi/job-portal:1.0.0  # Use your versioned image here or "latest"
+          ports:
+            - containerPort: 8080
+          env:
+            - name: SPRING_DATASOURCE_URL
+              value: "jdbc:mysql://jobportal-db:3306/job_portal_db"
+            - name: SPRING_DATASOURCE_USERNAME
+              value: "root"
+            - name: SPRING_DATASOURCE_PASSWORD
+              value: "root"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: jobportal-app
+spec:
+  ports:
+    - port: 8080
+  selector:
+    app: jobportal-app
+  type: LoadBalancer

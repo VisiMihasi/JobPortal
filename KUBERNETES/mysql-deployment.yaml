@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jobportal-db
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: jobportal-db
+  template:
+    metadata:
+      labels:
+        app: jobportal-db
+    spec:
+      containers:
+        - name: mysql
+          image: mysql:latest
+          ports:
+            - containerPort: 3306
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              value: "root"
+            - name: MYSQL_DATABASE
+              value: "job_portal_db"
+          volumeMounts:
+            - name: mysql-data
+              mountPath: /var/lib/mysql
+      volumes:
+        - name: mysql-data
+          persistentVolumeClaim:
+            claimName: mysql-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: jobportal-db
+spec:
+  ports:
+    - port: 3306
+  selector:
+    app: jobportal-db
+  type: ClusterIP
