@@ -4,8 +4,6 @@ on:
   push:
     branches:
       - Deployment
-    paths-ignore:
-      - 'version.properties'
 
 permissions:
   contents: write
@@ -24,9 +22,6 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
-          java-package: jdk
-          architecture: x64
-          check-latest: false
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
@@ -39,23 +34,24 @@ jobs:
 
       - name: Calculate new version
         run: |
-          VERSION=`cat version.properties | cut -d'=' -f2`
-          NEW_VERSION="${VERSION%.*}.$((${VERSION##*.}+1))"
-
+          VERSION=$(cat version.properties | cut -d'=' -f2)
+          NEW_VERSION=$(awk -F. '{print $1"."$2"."$3+1}' version.properties)
+          
           echo "VERSION=$NEW_VERSION" > version.properties
           echo "New version: $NEW_VERSION"
-
+          
           git config --global user.email "action@github.com"
           git config --global user.name "GitHub Action"
 
           git add version.properties
           git commit -m "Bump version to $NEW_VERSION"
 
-          # Authenticate using GH_PAT instead of GITHUB_TOKEN
-          git remote set-url origin https://x-access-token:${{ secrets.GH_PAT }}@github.com/VisiMihasi/JobPortal.git
+          # Authenticate using GH_PAT
+          git remote set-url origin https://${{ secrets.GH_PAT }}@github.com/VisiMihasi/JobPortal.git
 
-          # Push changes to Deployment branch
+          # Push changes
           git push origin HEAD:Deployment --force
+          echo "NEW_VERSION=$NEW_VERSION" >> $GITHUB_ENV
         env:
           GH_PAT: ${{ secrets.GH_PAT }}
 
@@ -71,7 +67,7 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: visimihasi/job-portal:$NEW_VERSION
+          tags: visimihasi/job-portal:${{ env.NEW_VERSION }}
 
       - name: Output new version
         run: echo "The new Docker image version is ${{ env.NEW_VERSION }}"
