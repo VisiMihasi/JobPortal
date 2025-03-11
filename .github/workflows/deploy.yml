@@ -46,6 +46,7 @@ jobs:
 
 
 
+       # Read current version
       - name: Read current version
         run: |
           VERSION=$(cat version.properties | cut -d'=' -f2)
@@ -61,10 +62,6 @@ jobs:
           context: .
           file: ./DOCKER/Dockerfile
           push: true
-          tags: visimihasi/job-portal:${{ env.NEW_VERSION }}
-          build-args: JAR_FILE=job-portal-${{ env.NEW_VERSION }}.jar
+          tags: visimihasi/job-portal:${{ env.VERSION }}
+          build-args: JAR_FILE=job-portal-${{ env.VERSION }}.jar
 
-
-      # Output the new version
-      - name: Output new version
-        run: echo "The new Docker image version is ${{ env.NEW_VERSION }}"
