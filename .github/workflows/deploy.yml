@@ -63,7 +63,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: .
-          file: ./Dockerfile
+          file: ./DOCKER/Dockerfile
           push: true
           tags: visimihasi/job-portal:${{ env.NEW_VERSION }}
           build-args: JAR_FILE=job-portal-${{ env.NEW_VERSION }}.jar
