@@ -18,7 +18,7 @@ RUN chmod +x ./gradlew
 RUN ./gradlew build -x test
 
 # Argument to pass the JAR file name
-ARG JAR_FILE=job-portal-1.0.0.jar
+ARG JAR_FILE
 
 # Copy the built JAR file into the image
 COPY build/libs/$JAR_FILE app.jar
