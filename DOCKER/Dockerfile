@@ -17,8 +17,9 @@ RUN chmod +x ./gradlew
 # Build the application using Gradle
 RUN ./gradlew build -x test
 
-# Copy the built JAR file into the image and rename it
-COPY build/libs/backend-0.0.1-SNAPSHOT.jar app.jar
+# Copy the built JAR file into the image using the JAR file name as a build argument
+ARG JAR_FILE
+COPY build/libs/$JAR_FILE app.jar
 
 # Expose port 8080 for the application
 EXPOSE 8080
