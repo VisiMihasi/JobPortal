@@ -46,6 +46,14 @@ jobs:
 
 
 
+      - name: Read current version
+        run: |
+          VERSION=$(cat version.properties | cut -d'=' -f2)
+          echo "Current version: $VERSION"
+          echo "VERSION=$VERSION" >> $GITHUB_ENV
+
+
+
       # Build and push Docker image
       - name: Build and push Docker image
         uses: docker/build-push-action@v2
@@ -56,23 +64,6 @@ jobs:
           tags: visimihasi/job-portal:${{ env.NEW_VERSION }}
           build-args: JAR_FILE=job-portal-${{ env.NEW_VERSION }}.jar
 
-            # Calculate new version
-      - name: Calculate new version
-        run: |
-          VERSION=$(cat version.properties | cut -d'=' -f2)
-          NEW_VERSION=$(echo $VERSION | awk -F. '{$NF++;print $0}' OFS='.')
-          echo "version=$NEW_VERSION" > version.properties
-          echo "New version: $NEW_VERSION"
-          echo "NEW_VERSION=$NEW_VERSION" >> $GITHUB_ENV
-
-      # Commit and push new version number
-      - name: Commit new version and push
-        run: |
-          git config --global user.email "action@github.com"
-          git config --global user.name "GitHub Action"
-          git add version.properties
-          git commit -m "Bump version to $NEW_VERSION"
-          git push
 
       # Output the new version
       - name: Output new version
