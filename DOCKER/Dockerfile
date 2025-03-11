@@ -15,11 +15,11 @@ COPY version.properties .
 # Grant execution rights on the gradlew script
 RUN chmod +x ./gradlew
 
-# Build the application using Gradle
+# Build the application using Gradle (excluding tests)
 RUN ./gradlew build -x test
 
-# Argument to pass the JAR file name
-ARG JAR_FILE
+# Always use the same name for the JAR file
+ARG JAR_FILE=job-portal.jar
 
 # Copy the built JAR file into the image
 COPY build/libs/$JAR_FILE app.jar

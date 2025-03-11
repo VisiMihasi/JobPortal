@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: jobportal-app
-          image: visimihasi/job-portal:1.0.0  # Use your versioned image here or "latest"
+          image: visimihasi/job-portal:latest
           ports:
             - containerPort: 8080
           env:
@@ -32,6 +32,8 @@ metadata:
 spec:
   ports:
     - port: 8080
+      targetPort: 8080
+      nodePort: 30080  # Optional: You can specify the port here, or let Kubernetes assign one
   selector:
     app: jobportal-app
-  type: LoadBalancer
+  type: NodePort  # Change this to NodePort for local environments
