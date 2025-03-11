@@ -59,6 +59,8 @@ jobs:
         env:
           GH_PAT: ${{ secrets.GH_PAT }}
 
+      - name: Grant execute permissions to Gradle wrapper
+        run: chmod +x ./gradlew
 
       - name: Build with Gradle
         run: ./gradlew build
