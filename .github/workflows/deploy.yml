@@ -36,6 +36,11 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
+
+      # Grant execute permissions to Gradle wrapper
+      - name: Grant execute permissions to Gradle wrapper
+        run: chmod +x ./gradlew
+
       # Build the application with Gradle
       - name: Build with Gradle
         run: ./gradlew build
