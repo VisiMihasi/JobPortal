@@ -62,6 +62,9 @@ jobs:
           context: .
           file: ./DOCKER/Dockerfile
           push: true
-          tags: visimihasi/job-portal:${{ env.VERSION }}
-          build-args: JAR_FILE=job-portal-${{ env.VERSION }}.jar
+          tags: |
+            visimihasi/job-portal:${{ env.VERSION }}
+            visimihasi/job-portal:latest
+          build-args:
+            JAR_FILE=job-portal-${{ env.VERSION }}.jar
 
