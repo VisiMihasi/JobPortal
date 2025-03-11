@@ -37,15 +37,24 @@ jobs:
         run: |
           VERSION=`cat version.properties | cut -d'=' -f2`
           NEW_VERSION="${VERSION%.*}.$((${VERSION##*.}+1))"
+
           echo "VERSION=$NEW_VERSION" > version.properties
           echo "New version: $NEW_VERSION"
+
           git config --global user.email "action@github.com"
           git config --global user.name "GitHub Action"
+
           git add version.properties
           git commit -m "Bump version to $NEW_VERSION"
-          git push --set-upstream origin HEAD:Deployment --force
+
+          # Authenticate using GH_PAT instead of GITHUB_TOKEN
+          git remote set-url origin https://x-access-token:${{ secrets.GH_PAT }}@github.com/VisiMihasi/JobPortal.git
+
+          # Push changes to Deployment branch
+          git push origin HEAD:Deployment --force
         env:
-            GITHUB_TOKEN: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
+          GH_PAT: ${{ secrets.GH_PAT }}
+
 
       - name: Build with Gradle
         run: ./gradlew build
