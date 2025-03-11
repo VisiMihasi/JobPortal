@@ -34,27 +34,35 @@ jobs:
 
       - name: Calculate new version
         run: |
-          # Read the current version (ensure correct format)
+          # Read the current version from version.properties
           VERSION=$(grep '^version=' version.properties | cut -d'=' -f2)
 
-          # Increment only the last digit (e.g., 1.0.0 → 1.0.1)
-          NEW_VERSION=$(echo $VERSION | awk -F. '{print $1"."$2"."($3+1)}')
+          # Split the version into major, minor, and patch components, and increment the patch version
+          MAJOR=$(echo $VERSION | cut -d '.' -f1)
+          MINOR=$(echo $VERSION | cut -d '.' -f2)
+          PATCH=$(echo $VERSION | cut -d '.' -f3)
 
-          # Overwrite version.properties with the new version
+          # Increment the patch version
+          NEW_PATCH=$((PATCH+1))
+
+          # Create the new version string
+          NEW_VERSION="${MAJOR}.${MINOR}.${NEW_PATCH}"
+
+          # Write the new version to version.properties
           echo "version=$NEW_VERSION" > version.properties
 
-          # Print the new version
+          # Print the new version for debugging purposes
           echo "New version: $NEW_VERSION"
 
-          # Configure Git
+          # Configure Git for commit
           git config --global user.email "action@github.com"
           git config --global user.name "GitHub Action"
 
-          # Commit the version update
+          # Commit the updated version.properties file
           git add version.properties
           git commit -m "Bump version to $NEW_VERSION"
 
-          # Authenticate using GH_PAT and push changes
+          # Authenticate using the GitHub PAT token and push changes to the Deployment branch
           git remote set-url origin "https://x-access-token:${{ secrets.GH_PAT }}@github.com/VisiMihasi/JobPortal.git"
           git push origin HEAD:Deployment --force
 
@@ -70,7 +78,3 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: visimihasi/job-portal:${{ env.NEW_VERSION }}
-
-
-      - name: Output new version
-        run: echo "The new Docker image version is ${{ env.NEW_VERSION }}"
