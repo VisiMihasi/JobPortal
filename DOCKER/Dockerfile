@@ -10,6 +10,7 @@ COPY gradle gradle
 COPY build.gradle .
 COPY settings.gradle .
 COPY src src
+COPY version.properties .
 
 # Grant execution rights on the gradlew script
 RUN chmod +x ./gradlew
