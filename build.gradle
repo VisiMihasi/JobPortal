@@ -37,3 +37,16 @@ repositories {
 tasks.named('test') {
 	useJUnitPlatform()
 }
+
+// Define the version in a properties file instead of hardcoding in gradle file
+def versionProps = new Properties()
+file('version.properties').withInputStream { versionProps.load(it) }
+
+// Set the project version
+version = versionProps['version']
+
+jar {
+	archiveBaseName = 'job-portal'
+	archiveVersion = version
+	archiveClassifier = ''
+}
