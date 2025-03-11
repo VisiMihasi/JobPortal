@@ -34,32 +34,34 @@ jobs:
 
       - name: Calculate new version
         run: |
-          VERSION=$(cat version.properties | cut -d'=' -f2)
-          NEW_VERSION=$(awk -F. '{print $1"."$2"."($3+1)}' version.properties)
-          
-          echo "VERSION=$NEW_VERSION" > version.properties
+          # Read the current version (ensure correct format)
+          VERSION=$(grep '^version=' version.properties | cut -d'=' -f2)
+
+          # Increment only the last digit (e.g., 1.0.0 → 1.0.1)
+          NEW_VERSION=$(echo $VERSION | awk -F. '{print $1"."$2"."($3+1)}')
+
+          # Overwrite version.properties with the new version
+          echo "version=$NEW_VERSION" > version.properties
+
+          # Print the new version
           echo "New version: $NEW_VERSION"
-          
+
+          # Configure Git
           git config --global user.email "action@github.com"
           git config --global user.name "GitHub Action"
 
+          # Commit the version update
           git add version.properties
           git commit -m "Bump version to $NEW_VERSION"
 
-          # Authenticate using GH_PAT
+          # Authenticate using GH_PAT and push changes
           git remote set-url origin "https://x-access-token:${{ secrets.GH_PAT }}@github.com/VisiMihasi/JobPortal.git"
-
-          # Push changes
           git push origin HEAD:Deployment --force
-          echo "NEW_VERSION=$NEW_VERSION" >> $GITHUB_ENV
+
+          # Set the new version as an environment variable for later use
+          echo "NEW_VERSION=${NEW_VERSION}" >> $GITHUB_ENV
         env:
           GH_PAT: ${{ secrets.GH_PAT }}
-
-      - name: Grant execute permissions to Gradle wrapper
-        run: chmod +x gradlew
-
-      - name: Build with Gradle
-        run: ./gradlew build
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v2
@@ -68,6 +70,7 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: visimihasi/job-portal:${{ env.NEW_VERSION }}
+
 
       - name: Output new version
         run: echo "The new Docker image version is ${{ env.NEW_VERSION }}"
