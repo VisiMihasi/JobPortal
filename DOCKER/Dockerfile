@@ -17,8 +17,10 @@ RUN chmod +x ./gradlew
 # Build the application using Gradle
 RUN ./gradlew build -x test
 
-# Copy the built JAR file into the image using the JAR file name as a build argument
-ARG JAR_FILE
+# Argument to pass the JAR file name
+ARG JAR_FILE=job-portal-1.0.0.jar
+
+# Copy the built JAR file into the image
 COPY build/libs/$JAR_FILE app.jar
 
 # Expose port 8080 for the application
