@@ -41,9 +41,11 @@ jobs:
           echo "New version: $NEW_VERSION"
           git config --global user.email "action@github.com"
           git config --global user.name "GitHub Action"
-          git commit -am "Bump version to $NEW_VERSION"
-          git push
-          echo "NEW_VERSION=$NEW_VERSION" >> $GITHUB_ENV
+          git add version.properties
+          git commit -m "Bump version to $NEW_VERSION"
+          git push --set-upstream origin HEAD:Deployment --force
+        env:
+            GITHUB_TOKEN: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
 
       - name: Build with Gradle
         run: ./gradlew build
