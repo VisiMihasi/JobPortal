@@ -36,56 +36,41 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
+      # Build the application with Gradle
+      - name: Build with Gradle
+        run: ./gradlew build
+
+      # Calculate new version
+      - name: Calculate new version
+        run: |
+          VERSION=$(cat version.properties | cut -d'=' -f2)
+          NEW_VERSION=$(echo $VERSION | awk -F. '{$NF++;print $0}' OFS='.')
+          echo "version=$NEW_VERSION" > version.properties
+          echo "New version: $NEW_VERSION"
+          echo "NEW_VERSION=$NEW_VERSION" >> $GITHUB_ENV
+
       # Grant execute permissions to Gradle wrapper
       - name: Grant execute permissions to Gradle wrapper
         run: chmod +x ./gradlew
 
-      # Build the application with Gradle first
-      - name: Build with Gradle
-        run: ./gradlew build
-
-      # List build/libs to verify the JAR file exists
-      - name: List build/libs directory
-        run: ls -al build/libs  # Debug step to check if the JAR file exists
-
-      # Calculate new version after the JAR is built
-      - name: Calculate new version
-        run: |
-          # Read the current version from version.properties
-          VERSION=$(cat version.properties | cut -d'=' -f2)
-          
-          # Increment the version
-          NEW_VERSION=$(echo $VERSION | awk -F. '{$NF++;print $0}' OFS='.').0
-          
-          # Update version.properties with the new version
-          echo "version=$NEW_VERSION" > version.properties
-          echo "New version: $NEW_VERSION"
-          
-          # Git configuration
-          git config --global user.email "action@github.com"
-          git config --global user.name "GitHub Action"
-          
-          # Commit the new version to version.properties
-          git add version.properties
-          git commit -m "Bump version to $NEW_VERSION"
-          
-          # Push the changes to the Deployment branch
-          git remote set-url origin https://${{ secrets.GH_PAT }}@github.com/VisiMihasi/JobPortal.git
-          git push origin HEAD:Deployment --force
-          
-          # Set the new version as environment variable for use in the Docker build step
-          echo "NEW_VERSION=$NEW_VERSION" >> $GITHUB_ENV
-
-      # Build and push Docker image with the correct version
+      # Build and push Docker image
       - name: Build and push Docker image
         uses: docker/build-push-action@v2
         with:
           context: .
-          file: ./DOCKER/Dockerfile
+          file: ./Dockerfile
           push: true
           tags: visimihasi/job-portal:${{ env.NEW_VERSION }}
-          build-args: |
-            JAR_FILE=job-portal-${{ env.NEW_VERSION }}.jar  # Pass the correct JAR file name as an argument
+          build-args: JAR_FILE=job-portal-${{ env.NEW_VERSION }}.jar
+
+      # Commit and push new version number
+      - name: Commit new version and push
+        run: |
+          git config --global user.email "action@github.com"
+          git config --global user.name "GitHub Action"
+          git add version.properties
+          git commit -m "Bump version to $NEW_VERSION"
+          git push
 
       # Output the new version
       - name: Output new version
