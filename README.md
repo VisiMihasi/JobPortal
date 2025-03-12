@@ -205,3 +205,49 @@ This document provides the details of the API endpoints for the Job Portal appli
 5. Create a new Pull Request.
 
 ---
+
+# Job Portal Kubernetes Deployment
+
+## Prerequisites
+
+Before running the application with Kubernetes, ensure the following prerequisites are met:
+
+- **Rancher** must be installed to manage your Kubernetes cluster.
+- **Kubernetes** should be active and properly configured.
+
+Follow these steps to set up the environment and deploy the application.
+
+### Step 1: Install Rancher and Set Up Kubernetes
+1. **Install Rancher**: Rancher is used to manage the Kubernetes cluster. You can install it using the official [Rancher documentation](https://rancher.com/docs/rancher/v2.x/en/installation/).
+2. **Set up Kubernetes Cluster**: Use Rancher to set up your Kubernetes cluster. Ensure the cluster is running and accessible.
+
+### Step 2: Apply Kubernetes YAML Files
+After setting up Rancher and Kubernetes, you need to apply the following YAML files to deploy both the JobPortal application and MySQL database in Kubernetes:
+
+- **Apply JobPortal Deployment**:
+
+   ```bash
+   kubectl apply -f jobportal-deployment.yaml
+
+- **Apply MySQL Deployment:**:
+  kubectl apply -f mysql-deployment.yaml
+
+### Step 3: Access the Services
+
+Once the deployments are successful, the following services will be available for access:
+- **Job Portal App Service:**:
+
+URL: http://localhost:30080
+
+This service is exposed on NodePort 30080.
+
+- **MySQL Database Service:**:
+
+The MySQL service is accessible within the Kubernetes network on NodePort 30006.
+### 4: Step Continuous Deployment on Branch Merge
+
+Every time a branch is merged into the Deployment branch, the following actions will occur:
+
+App Image Deployment: A new Docker image of the app will be deployed.
+Kubernetes Deployment Update: The Kubernetes deployment will pull the latest app image, ensuring that the most recent version of the app is running in the cluster.
+This setup allows automatic updates to your application in Kubernetes whenever changes are pushed to the Deployment branch.
