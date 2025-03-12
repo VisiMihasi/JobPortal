@@ -18,11 +18,11 @@ RUN chmod +x ./gradlew
 # Build the application using Gradle (excluding tests)
 RUN ./gradlew build -x test
 
-# Copy the built JAR file into the image
-COPY build/libs/job-portal.jar app.jar
+
+COPY build/libs/job-portal.jar /app/app.jar
 
 # Expose port 8080 for the application
 EXPOSE 8080
 
 # Command to run the Spring Boot application
-CMD ["java", "-jar", "app.jar"]
+CMD ["java", "-jar", "/app/app.jar"]
