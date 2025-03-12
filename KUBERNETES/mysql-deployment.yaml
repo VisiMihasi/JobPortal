@@ -1,3 +1,14 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mysql-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi  # Adjust the size as needed
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -19,9 +30,9 @@ spec:
             - containerPort: 3306
           env:
             - name: MYSQL_ROOT_PASSWORD
-              value: "root"
+              value: "root"  # Set the root password here
             - name: MYSQL_DATABASE
-              value: "job_portal_db"
+              value: "job_portal_db"  # The database that will be created
           volumeMounts:
             - name: mysql-data
               mountPath: /var/lib/mysql
